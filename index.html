@@ -1,0 +1,87 @@
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+	<link rel="icon" 
+      type="image/png" 
+      href="images/mashicon.ico">
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<title>Mashabout - Chat with Gifs, Yo!</title>
+
+</head>
+
+<body>
+
+	<div id="container"> <!-- Try to Find Closing Tag-->
+		<!--Initial Sign-In Form-->	
+
+	<!--nickWrap Opening Page-->
+	<div id="nickWrap">
+		<p>Welcome to Mashabout...</p>
+		<img src="http://www.reactiongifs.com/r/trip1.gif">
+		<p>Choose Your Name, Player</p>
+		<p id="nickError"></p>
+		<form id="setNick">
+			<input size="35" id="nickname"></input>
+			<input type="submit"></input>
+		</form>	
+	</div>
+
+		<!--Chat Page Seen Upon Sign-In-->	
+		<div id="contentWrap">
+
+			<!--Main Chat Section-->
+			<div id="chatWrap">
+				<div id="myChat"></div>
+				<select id="users" size="25">
+				</select>
+				<!-- Chat Window-->
+				<div id="chatWindow">
+					<!-- begin big adventure...-->
+				<div id="msgBoxGroup" class="chatTabPrivate">
+				</div>
+				</div>
+				
+			</div>
+
+				<!--Send Message Input Section-->
+				<form id="send-message" >
+						<input size="65" id="message" class="submission" placeholder="Type something, drag a gif or add a link here yo"></input>
+						<input type="submit"></input>
+				</form>
+
+					<!--Gif Search Section-->
+					<div id="Gif_Zone">
+						<form id="gif_search">
+							<select id="select_channel">
+								<option value="giphy">Giphy</a>
+								<option value="replygif">ReplyGif</a>
+							</select>		
+							<input id="gifPull" size="32"  placeholder="Search for a GIF i.e. 'lol'"></input>
+							<input type="submit"></input>		
+						</form>
+
+						<div id="gif_window">	
+						</div>
+
+						<button id="Gif_Hide">X</button>		
+					</div>
+
+					<button id="Gif_Button">Gifs</button>
+					
+					<!--</div>-->
+
+					</div><!--Content Wrap Div Closing Tag -->
+
+				
+
+				</div><!--Container Div Closing Tag -->
+
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<!--Front-End Logic-->
+	<script src="js/chat.js"></script>
+
+</body>
+</html>
