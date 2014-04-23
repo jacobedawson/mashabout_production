@@ -33,8 +33,9 @@
 					if(data) {
 						$('#nickWrap').hide();
 						$('#contentWrap').show();
-					} else {
-						$nickError.html('That name is taken bro, try another one.')
+					} 
+					else {
+						$nickError.html('That name is taken bro, try another one.');
 					}
 				});
 				$nickBox.val('');
@@ -88,10 +89,6 @@
 				pmTarget = ' ';
 			});
 
-
-
-
-		
 
 			//this essentially makes every message either group or private, with group the default
 			$messageForm.submit(function(e){
@@ -155,7 +152,6 @@
 				//add notification highlighting
 				$('#' + data.nick).addClass('notification');
 				displayPM(data);	
-				
 			});
 
 
@@ -172,8 +168,13 @@
 					'<div class ="msgBody">' + data.msg + '</div>' + "</div><br/>");
 				$('#msgBox' + data.nick).append('<div class="private msg"><b><div class="msgFrom"><b>' + data.nick + ': </b></div>' + 
 					'<div class ="msgBody">' + data.msg + '</div>' + "</div><br/>");
-				$('#msgBox' + data.to).scrollTop($('#msgBox' + data.to)[0].scrollHeight);
-			}
+				
+				if(data.to == whoAmI) {
+					$('#msgBox' + data.nick).scrollTop($('#msgBox' + data.nick)[0].scrollHeight);
+				} else {
+					$('#msgBox' + data.to).scrollTop($('#msgBox' + data.to)[0].scrollHeight);
+				}
+			};
 
 				//toggle content divs (still in progress)
 				//currently '$this' is the entire a href tag
