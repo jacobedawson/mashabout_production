@@ -143,8 +143,11 @@
 					tabNotify(data);	
 					$chat.append('<div class="msg"><div class="msgFrom"><b>' + data.nick + ': </b></div>' + 
 						'<div class ="msgBody">' + data.msg + '</div>' + "</div><br/>");
-					$chat.scrollTop($chat[0].scrollHeight);
-
+					if(data.to == null) {
+						$chat.scrollTop($chat[0].scrollHeight);
+					} else {
+						$chat.scrollTop($('#msgBox' + data.to)[0].scrollHeight);
+					}
 			}
 
 			//private messaging 
