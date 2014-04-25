@@ -1,3 +1,5 @@
+@import url('/css/normalize.css');
+
 html {
   overflow-y: scroll;
 }
@@ -9,6 +11,7 @@ body {
 	#container {
 		width: 900px;
 		margin: auto;
+		margin-top: 100px;
 	}
 
 	#nickWrap {
@@ -170,7 +173,7 @@ body {
 			max-height: 600px;
 			position: relative;
 			left: 700px;
-			bottom: 710px;
+			bottom: 709px;
 			overflow-y: auto;
 		}
 
@@ -179,13 +182,17 @@ body {
 		}
 
 		#gifPull {
-			border-radius: 2px;
+			width: 225px;
+		}
+
+		#gifPullSubmit {
+			width: 65px;
 		}
 
 		#gif_search {
-			width: 385px;
+			width: 400px;
 			position: relative;
-			top: -65px;
+			top: -60px;
 			left: 710px;
 		}
 
