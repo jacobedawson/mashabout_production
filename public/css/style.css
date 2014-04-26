@@ -94,6 +94,15 @@ body {
 			display:block;
 		}
 
+		#timeCode {
+			position: relative;
+			left: 328px;
+			top: 12px;
+			color: rgb(175, 175, 175);
+			/*font-family: Lucida Console, Monaco5, monospace;*/
+			font-size: 0.8em;
+		}
+
 		/*
 		.msgBody:after {
 			content: '';

@@ -109,7 +109,7 @@
 			//Function to distribute old messages to correct user's history - to add...
 			function loadOldMsgs(data) {
 				$chat.append('<div class="msg"><div class="msgFrom"><b>' + data.nick + ': </b></div>' + 
-						'<div class ="msgBody">' + data.msg + '</div>' + "</div><br/>");
+						'<div class ="msgBody">' + data.msg + '<div id="timeCode"><span>' + timeCode(data.created) + '</span></div></div>' + "</div><br/>");
 					$chat.scrollTop($chat[0].scrollHeight);
 			}
 			
@@ -142,7 +142,7 @@
 			function displayMsg(data) {
 					tabNotify(data);	
 					$chat.append('<div class="msg"><div class="msgFrom"><b>' + data.nick + ': </b></div>' + 
-						'<div class ="msgBody">' + data.msg + '</div>' + "</div><br/>");
+						'<div class ="msgBody">' + data.msg + '<div id="timeCode"><span>' + timeCode(data.created) + '</span></div></div>' + "</div><br/>");
 					$('#msgBoxGroup').scrollTop($('#msgBoxGroup')[0].scrollHeight);
 			}
 
@@ -164,9 +164,9 @@
 				//add tab message notification
 					tabNotify(data);
 				$('#msgBox' + data.to).append('<div class="private msg"><b><div class="msgFrom"><b>' + data.nick + ': </b></div>' + 
-					'<div class ="msgBody">' + data.msg + '</div>' + "</div><br/>");
+					'<div class ="msgBody">' + data.msg + '<div id="timeCode"><span>' + timeCode(data.created) + '</span></div></div>' + "</div><br/>");
 				$('#msgBox' + data.nick).append('<div class="private msg"><b><div class="msgFrom"><b>' + data.nick + ': </b></div>' + 
-					'<div class ="msgBody">' + data.msg + '</div>' + "</div><br/>");
+					'<div class ="msgBody">' + data.msg + '<div id="timeCode"><span>' + timeCode(data.created) + '</span></div></div>' + "</div><br/>");
 				
 				if(data.to == whoAmI) {
 					$('#msgBox' + data.nick).scrollTop($('#msgBox' + data.nick)[0].scrollHeight);
@@ -185,7 +185,18 @@
 						$('#msgBox' + tabName).scrollTop($('#msgBox' + tabName)[0].scrollHeight);
 					});
 
+			function timeCode(data) {
+				var wholeTime = data.slice(11,16);
+					var justHours = wholeTime.slice(0,2);
+					var justMinutes = wholeTime.slice(3,5);
+					var amToPm = "AM";
 
+					if(justHours >= 12) {
+					    justHours = justHours - 12;
+					    amToPm = "PM";
+					}
+					return justHours + ":" + justMinutes + " " + amToPm;
+			};	
 
 			//error message if someone private messages themselves
 			socket.on('error', function(data) {

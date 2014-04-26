@@ -126,7 +126,7 @@ io.sockets.on('connection', function(socket){
 					if(Object.keys(users).length <= 1) {
 						msg = "<b>Ain\'t nobody else here, player :(</b><br><img src=\"http://static.nme.com/images/tumbleweed01.jpg\"/><b>You should *totes* invite someone else.<br>Don\'t leave me hanging on like a solo...</b>";
 					}
-				io.sockets.emit('new message', {msg: msg, nick: socket.nickname, to: pm});
+				io.sockets.emit('new message', {msg: msg, nick: socket.nickname, to: pm, created: new Date()});
 			});	
 		}
 		
