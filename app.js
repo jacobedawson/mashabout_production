@@ -114,7 +114,7 @@ io.sockets.on('connection', function(socket){
 	//sort old messages
 	var query = Chat.find({});
 	//reverse the order (most recent at bottom of window)
-	query.sort('-created').limit(500).exec(function(err, docs) {
+	query.sort('-created').limit(100).exec(function(err, docs) {
 		if(err) throw err;
 		socket.emit('load old msgs', docs);
 	});
