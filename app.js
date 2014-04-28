@@ -112,8 +112,8 @@ io.sockets.on('connection', function(socket){
 					}
 
 					//send private message
-					users[name].emit('private', {msg: msg, nick: socket.nickname, to: pm});
-					users[socket.nickname].emit('private', {msg: msg, nick: socket.nickname, to: pm});
+					users[name].emit('private', {msg: msg, nick: socket.nickname, to: pm, created: new Date()});
+					users[socket.nickname].emit('private', {msg: msg, nick: socket.nickname, to: pm, created: new Date()});
 				} else {
 					//send public message
 					var newMsg = new Chat({msg: msg, nick: socket.nickname});

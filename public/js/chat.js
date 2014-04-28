@@ -5,15 +5,18 @@
 			var $nickError = $('#nickError');
 			var $nickBox = $('#nickname');
 			var $users = $('#users');
+			var $group = $('#group');
 			var $messageForm = $('#send-message');
 			var $messageBox = $('#message');
 			var $chat = $('#msgBoxGroup');
 			var $chatWindow = $('#chatWindow');
 			var $gifWindow = $('#gif_window');
 			var $gifButton = $('#Gif_Button');
-			var $gifHide = $('#Gif_Hide');
+			var $gifZone = $('#Gif_Zone');
+			var $gifsearch = $('#gif_search');
 			var $selectChannel = $('#select_channel');
 			var $myChat = $('#myChat');
+			var $title = $('title');
 			var pmTarget;
 			var $pmWindow = $('#' + pmTarget);
 			//to capture who client is
@@ -70,7 +73,7 @@
 			});
 
 			//private message grab	
-			$("#users").on("click", 'option', function(event) {
+			$users.on("click", 'option', function(event) {
   					//private message grab
   					pmTarget = $(this).text();
   					tabReducify();
@@ -85,7 +88,7 @@
 
 
 			//if group is clicked, the message is to the whole group
-			$('#group').on("click", 'option', function(event) {
+			$group.on("click", 'option', function(event) {
 				pmTarget = ' ';
 			});
 
@@ -117,7 +120,7 @@
 			socket.on('new message', function(data){
 				displayMsg(data);
 				if(data.to == 'Group') {
-					$('#group').addClass('notification');
+					$group.addClass('notification');
 				};
 			});
 
@@ -127,7 +130,7 @@
 			function tabNotify(data) {
 				if( data.nick !== whoAmI) {
 				tabNotification+=1;
-					$('title').text('(' + tabNotification + ') - ' + 'Mashabout - Chat with Gifs, Yo!');
+					$title.text('(' + tabNotification + ') - ' + 'Mashabout - Chat with Gifs, Yo!');
 					} else {
 						return;
 					}
@@ -135,7 +138,7 @@
 
 			function tabReducify() {
 				tabNotification = 0;
-				$('title').text('Mashabout - Chat with Gifs, Yo!');
+				$title.text('Mashabout - Chat with Gifs, Yo!');
 			}
 
 			//public messaging 
@@ -155,7 +158,7 @@
 
 
 			//remove notification
-			$('#users').on('click', 'option', function() {
+			$users.on('click', 'option', function() {
 				$(this).removeClass('notification');
 			});
 
@@ -173,11 +176,12 @@
 				} else {
 					$('#msgBox' + data.to).scrollTop($('#msgBox' + data.to)[0].scrollHeight);
 				}
+
 			};
 
 				//toggle content divs (still in progress)
 				//currently '$this' is the entire a href tag
-					$("#users").on('click', 'option', function(event) {
+					$users.on('click', 'option', function(event) {
 						var tabName = $(this).html();
 						//$('#pmMsgBox' + tabName).siblings().toggle();
 						$('.chatTabPrivate').not($('#msgBox' + tabName)).hide();
@@ -211,18 +215,18 @@
 			
 			//gifsearch area
 			$gifButton.on('click',function() {
-				$('#Gif_Zone').show(5);
+				$gifZone.show(5);
 				$gifButton.hide(5);
 			});
 
 			$gifHide.on('click',function() {
-				$('#Gif_Zone').hide(5);
+				$gifZone.hide(5);
 				$gifButton.show(5);
 			});
 
 			
 			//Gif Search functionality
-			var $gifsearch = $('#gif_search');
+			
 
 
 				$gifsearch.submit(function(e){
