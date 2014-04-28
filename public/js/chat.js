@@ -70,7 +70,7 @@
 			});
 
 			//private message grab	
-			$("#users").on("click", 'option', function(event) {
+			$users.on("click", 'option', function(event) {
   					//private message grab
   					pmTarget = $(this).text();
   					tabReducify();
@@ -116,7 +116,7 @@
 			//general messaging function
 			socket.on('new message', function(data){
 				displayMsg(data);
-				if(data.to == 'Group') {
+				if(data.to == 'Group' || data.to == null) {
 					$('#group').addClass('notification');
 				};
 			});

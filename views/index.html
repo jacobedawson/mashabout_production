@@ -1,0 +1,39 @@
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+	<link rel="icon" 
+      type="image/png" 
+      href="images/mashicon.ico">
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<title>Mashabout - Chat with Gifs, Yo!</title>
+
+</head>
+
+<body>
+
+	<div id="container"> <!-- Try to Find Closing Tag-->
+		<!--Initial Sign-In Form-->	
+		<div id="whut?"></div>
+			<!--nickWrap Opening Page-->
+			<div id="nickWrap">
+				<p>Welcome to Mashabout...</p>
+				<img src="http://www.reactiongifs.com/r/trip1.gif">
+				<p>Choose Your Name, Player</p>
+				<p id="nickError"></p>
+				<form id="setNick">
+					<input size="35" id="nickname"></input>
+					<input type="submit" value="Submit"></input>
+				</form>	
+			</div>
+
+	</div><!--Container Div Closing Tag -->
+
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<!--Front-End Logic-->
+	<script src="js/chat.js"></script>
+
+</body>
+</html>
