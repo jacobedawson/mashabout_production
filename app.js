@@ -7,7 +7,22 @@ var express = require('express'),
 	mongoose = require('mongoose'),
 	// usernames which are currently connected to the chat
 	users = {};
-	
+
+			io.enable('browser client minification');  // send minified client
+			io.enable('browser client etag');          // apply etag caching logic based on version number
+			io.set('log level', 1);                    // reduce logging
+
+			// enable all transports (optional if you want flashsocket support, please note that some hosting
+			// providers do not allow you to create servers that listen on a port different than 80 or their
+			// default port)
+			io.set('transports', [
+			    'websocket'
+			  , 'flashsocket'
+			  , 'htmlfile'
+			  , 'xhr-polling'
+			  , 'jsonp-polling'
+			]);
+
 	//express compress middleware
 	app.use(express.compress());
 
@@ -16,61 +31,6 @@ var express = require('express'),
 
 	//ask server to listen on available port
 	server.listen(process.env.PORT || 3000);
-
-	// We define the key of the cookie containing the Express SID
-	var EXPRESS_SID_KEY = 'express.sid';
-
-	// We define a secret string used to crypt the cookies sent by Express
-	var COOKIE_SECRET = 'some super secret string';
-	var cookieParser = express.cookieParser(COOKIE_SECRET);
-
-	// Create a new store in memory for the Express sessions
-	var sessionStore = new express.session.MemoryStore();
-
-	// Configure Express app with :
-	// * Cookie Parser created above
-	// * Configure Session Store
-	app.configure(function () {
-	    app.use(cookieParser);
-	    app.use(express.session({
-	        store: sessionStore,
-	        cookie: { 
-	            httpOnly: true
-	        },
-	        key: EXPRESS_SID_KEY
-	    }));
-	});
-
-	// We configure the socket.io authorization handler (handshake)
-		io.set('authorization', function (data, callback) {
-		    if(!data.headers.cookie) {
-		        return callback('No cookie transmitted.', false);
-		    }
-
-		    	// We use the Express cookieParser created before to parse the cookie
-			    // Express cookieParser(req, res, next) is used initialy to parse data in "req.headers.cookie".
-			    // Here our cookies are stored in "data.headers.cookie", so we just pass "data" to the first argument of function
-		    cookieParser(data, {}, function(parseErr) {
-		        if(parseErr) { return callback('Error parsing cookies.', false); }
-
-		        	// Get the SID cookie
-			        var sidCookie = (data.secureCookies && data.secureCookies[EXPRESS_SID_KEY]) ||
-			                        (data.signedCookies && data.signedCookies[EXPRESS_SID_KEY]) ||
-			                        (data.cookies && data.cookies[EXPRESS_SID_KEY]);
-
-			        // Then we just need to load the session from the Express Session Store
-        		sessionStore.load(sidCookie, function(err, session) {
-                // If you want, you can attach the session to the handshake data, so you can use it again later
-                // You can access it later with "socket.handshake.session"
-                data.session = session;
-
-                callback(null, true);
-            
-        });
-    });
-});
-
-
 
 
 
@@ -184,7 +144,7 @@ io.sockets.on('connection', function(socket){
 							return; 
 					}
 					//if there is only 1 user online
-					if(Object.keys(users).length <= 1) {
+					if(Object.keys(users).length == 1) {
 						msg = "<b>Ain\'t nobody else here, player :(</b><br><img src=\"http://static.nme.com/images/tumbleweed01.jpg\"/><b>You should *totes* invite someone else.<br>Don\'t leave me hanging on like a solo...</b>";
 					}
 				io.sockets.emit('new message', {msg: msg, nick: socket.nickname, to: pm, created: new Date()});

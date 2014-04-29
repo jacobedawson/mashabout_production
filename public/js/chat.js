@@ -142,7 +142,7 @@
 			function displayMsg(data) {
 					tabNotify(data);	
 					$chat.append('<div class="msg"><div class="msgFrom"><b>' + data.nick + ': </b></div>' + 
-						'<div class ="msgBody">' + data.msg + '<div id="timeCode"><span>' + timeCode(data.created) + '</span></div></div>' + "</div><br/>");
+						'<div class ="msgBody">' + data.msg + '<div id="timeCode"><div>' + timeCode(data.created) + '</div></div></div>' + "</div><br/>");
 					$('#msgBoxGroup').scrollTop($('#msgBoxGroup')[0].scrollHeight);
 			}
 
@@ -164,9 +164,9 @@
 				//add tab message notification
 					tabNotify(data);
 				$('#msgBox' + data.to).append('<div class="private msg"><div class="msgFrom"><b>' + data.nick + ': </b></div>' + 
-					'<div class ="msgBody">' + data.msg + '<div id="timeCode"><span>' + timeCode(data.created) + '</span></div></div>' + "</div><br/>");
+					'<div class ="msgBody">' + data.msg + '<div id="timeCode"><div>' + timeCode(data.created) + '</div></div></div>' + "</div><br/>");
 				$('#msgBox' + data.nick).append('<div class="private msg"><div class="msgFrom"><b>' + data.nick + ': </b></div>' + 
-					'<div class ="msgBody">' + data.msg + '<div id="timeCode"><span>' + timeCode(data.created) + '</span></div></div>' + "</div><br/>");
+					'<div class ="msgBody">' + data.msg + '<div id="timeCode"><div>' + timeCode(data.created) + '</div></div></div>' + "</div><br/>");
 				
 				if(data.to == whoAmI) {
 					$('#msgBox' + data.nick).scrollTop($('#msgBox' + data.nick)[0].scrollHeight);
