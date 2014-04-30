@@ -8,6 +8,8 @@ var express = require('express'),
 	// usernames which are currently connected to the chat
 	users = {};
 
+			//testing to disable heartbeats (re timeout issue, may reinstall)
+			io.disable('heartbeats');
 			io.enable('browser client minification');  // send minified client
 			io.enable('browser client etag');          // apply etag caching logic based on version number
 			io.set('log level', 1);                    // reduce logging

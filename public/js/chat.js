@@ -143,7 +143,7 @@
 					tabNotify(data);	
 					$chat.append('<div class="msg"><div class="msgFrom"><b>' + data.nick + ': </b></div>' + 
 						'<div class ="msgBody">' + data.msg + '<div id="timeCode"><div>' + timeCode(data.created) + '</div></div></div>' + "</div><br/>");
-					$('#msgBoxGroup').scrollTop($('#msgBoxGroup')[0].scrollHeight);
+					$chat.scrollTop($chat[0].scrollHeight);
 			}
 
 			//private messaging 
