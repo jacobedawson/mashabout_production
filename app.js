@@ -8,8 +8,6 @@ var express = require('express'),
 	// usernames which are currently connected to the chat
 	users = {};
 
-			//testing to disable heartbeats (re timeout issue, may reinstall)
-			io.disable('heartbeats');
 			io.enable('browser client minification');  // send minified client
 			io.enable('browser client etag');          // apply etag caching logic based on version number
 			io.set('log level', 1);                    // reduce logging
@@ -58,9 +56,9 @@ var chatSchema = new Schema({
 	created: {type: Date, default: Date.now}
 });
 
-//create a mongoose schema for user management i.e. logins and passwords
+/*//create a mongoose schema for user management i.e. logins and passwords
 //contained in the file 'user.js'
-var usermodel = require(__dirname + '/models/user.js');
+var usermodel = require(__dirname + '/models/user.js');*/
 
 var Chat = mongoose.model('Message', chatSchema);
 
@@ -71,6 +69,8 @@ app.get('/', function(req, res){
 	/*req.session.isLogged = true;*/
 });
 
+
+//EVERYTHING BELOW EXECUTED ONCE CONNECTED
 io.sockets.on('connection', function(socket){
 
 	//sort old messages
@@ -98,7 +98,7 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 
-
+	//function to update new user nicknames
 	function updateNicknames() {
 		io.sockets.emit('usernames', Object.keys(users));
 	}
@@ -106,6 +106,7 @@ io.sockets.on('connection', function(socket){
 	//create regular expression to look for img extensions
 	var myRegEx = new RegExp("^(https?|ftp)://.*(jpeg|png|jpg|gif|bmp)");
 
+	//what to do when someone sends a message
 	socket.on('send message', function(data, pm, callback){
 		var msg = data.trim();
 
@@ -158,7 +159,7 @@ io.sockets.on('connection', function(socket){
 
 
 
-
+	//what to do when a socket disconnects
 	socket.on('disconnect', function(data) {
 		if(!socket.nickname) return;
 		delete users[socket.nickname];
